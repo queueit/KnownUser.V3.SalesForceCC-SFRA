@@ -1,0 +1,23 @@
+<isscript>
+    var customSitePrefs = require("dw/system/Site").getCurrent().getPreferences().getCustom();
+    var queueitEnabled = "queueit-enabled" in customSitePrefs && customSitePrefs["queueit-enabled"];
+
+    var customerId = "";
+    if (queueitEnabled) {
+        customerId = "queueit-customerId" in customSitePrefs ? customSitePrefs["queueit-customerId"] : "";
+    }
+</isscript>
+
+<isif condition="${queueitEnabled}">
+    <script src="https://s3-eu-west-1.amazonaws.com/queueit-test-static/script/queueclient.js"></script>
+    <script src="https://s3-eu-west-1.amazonaws.com/queueit-test-static/script/queueconfigloader.js"
+        data-queueit-c="${customerId}"
+        data-queueit-host="queueitknownusertst.test.queue-it.net"
+        data-queueit-intercept="true"
+        data-queueit-interceptvnext
+        data-queueit-jshost="https://queueit-test-company.s3-eu-west-1.amazonaws.com/"
+        data-queueit-nocachereq="true"
+        data-queueit-intercept-domain="${request.httpHost}"
+        data-queueit-ku-redirect-headername="X-SF-CC-X-QUEUEIT-REDIRECT">
+    </script>
+</isif>

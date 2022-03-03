@@ -1,0 +1,12 @@
+{
+    "hooks": [
+        {
+            "name": "dw.system.request.onRequest",
+            "script": "./scripts/onRequestValidator.js"
+        },
+        {
+            "name": "app.template.afterFooter",
+            "script": "./scripts/afterFooterHookHandler.js"
+        }
+    ]
+}

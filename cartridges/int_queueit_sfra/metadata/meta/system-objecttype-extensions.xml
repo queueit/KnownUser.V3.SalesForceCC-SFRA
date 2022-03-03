@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="queueit-customerId">
+                <display-name xml:lang="x-default">Queue-it Customer Id</display-name>
+                <description xml:lang="x-default">Your Queue-it customer ID. Find it in GO Self-service platform, under Account -> Company Profile.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="queueit-enabled">
+                <display-name xml:lang="x-default">Queue-it enabled</display-name>
+                <description xml:lang="x-default">Should Queue-it be enabled for the selected site.</description>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="queueit-enableEnqueueToken">
+                <display-name xml:lang="x-default">Enable Enqueue Token</display-name>
+                <description xml:lang="x-default">Must also be enabled and configured in GO self-service platform. Reach out to Queue-it customer service for more info.</description>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="queueit-enableLogging">
+                <display-name xml:lang="x-default">Enable QueueIt Logging</display-name>
+                <description xml:lang="x-default">Enable logging to log queue-it data.</description>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="queueit-integrationsConfigString">
+                <display-name xml:lang="x-default">Queue-it Integrations Config string</display-name>
+                <description xml:lang="x-default">Your integration config as JSON string. Find it in GO Self-service platform, under Integration -> Show/Hide instructions -> Manually download the configuration file -> Download.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-length>120</field-length>
+                <field-height>100</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="queueit-secretKey">
+                <display-name xml:lang="x-default">Queue-it Secret Key</display-name>
+                <description xml:lang="x-default">Your 72 char KnownUser secret key. Find it in GO Self-service platform, under Account -> Settings -> Integration.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="queueit">
+                <display-name xml:lang="x-default">Queue-it Configurations</display-name>
+                <attribute attribute-id="queueit-enabled"/>
+                <attribute attribute-id="queueit-customerId"/>
+                <attribute attribute-id="queueit-secretKey"/>
+                <attribute attribute-id="queueit-enableEnqueueToken"/>
+                <attribute attribute-id="queueit-enableLogging"/>
+                <attribute attribute-id="queueit-integrationsConfigString"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>
