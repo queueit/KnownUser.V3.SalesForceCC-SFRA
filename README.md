@@ -43,7 +43,7 @@ The Queue-it cartridge relies on multiple attributes defined on the SitePreferen
     - When the XML schema validation finishes, make sure *not* to check the "Delete existing attribute definitions...". When this checkbox is left unchecked, the attributes defined in the XML file will be added, without removing any existing attributes.
     - Verify that the file content summary contains 1 system type extension,6 attribute definitions and 1 attribute group definition and nothing else and select import.
 
-#### Set Queue-It attributes values
+#### Set attributes values
 The Queue-it configuration is now ready to be used. The configuration can be found under `Merchant Tools` *(select site if prompted)* -> `Site Preferences` -> `Custom Preferences`. Please configure all the attributes before setting up the Queue-it cartridge.
 
 If you have multiple sites in Salesforce CC, but with a single account on Queue-it, please use the "Edit Across Sites" functionality on the Queue-it Configurations section of Custom Site Preferences.
