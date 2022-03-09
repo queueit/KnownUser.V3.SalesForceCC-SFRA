@@ -19,7 +19,7 @@ This Salesforce Commerce Cloud (CC) SFRA Cartridge will help you implement Queue
 The Queue-it cartridge relies on multiple attributes defined on the SitePreferences system object type, built in Salesforce CC SFRA. The attributes allows you to enable queue-it on a per-site basis and use different customer ids and configurations per site. You can either mannually define the following attributes in SitePreferences or download `system-objecttype-extensions.xml` file from [here](https://github.com/queueit/KnownUser.V3.SalesForceCC-SFRA/blob/main/cartridges/int_queueit_sfra/metadata/meta/system-objecttype-extensions.xml) and upload in business manager.
 
 | Attribute | Required | DataType | Value |
-| :---: | :---: | :---: |
+| :---: | :---: | :---: | :---: |
 | queueit-customerId | Yes | string | Find your Customer ID in the GO Queue-it Platform. |
 | queueit-enabled | Yes | bolean | Default: false |
 | queueit-enableEnqueueToken | Yes | bolean | Default: false |
@@ -27,13 +27,15 @@ The Queue-it cartridge relies on multiple attributes defined on the SitePreferen
 | queueit-integrationsConfigString | Yes | bolean | Find your integration cofiguration in the GO Queue-it Platform. |
 | queueit-secretKey | Yes | string | Find your Secret key in the GO Queue-it Platform. |
 
-#### Define Queue-It attributes
+### Setup Queue-It attributes
+
+#### Manually define attributes
 - In Business Manager of your Salesforce CC instance, go to `Administration` -> `Site Development` -> `System Object Types` -> `Site Preferences` -> `Attribute Definitions` tab.
 - Define the above mentioned attributes.
 - Then go to `Attribute Groups` on same page. Create 'queueit' group and include all Queue-IT attributes.
 
-#### Upload Queue-It attributes
-- Download `system-objecttype-extensions.xml` from latest released.
+#### Upload attributes
+- Download [`system-objecttype-extensions.xml`](https://github.com/queueit/KnownUser.V3.SalesForceCC-SFRA/blob/main/cartridges/int_queueit_sfra/metadata/meta/system-objecttype-extensions.xml) from latest release.
 - In Business Manager of your Salesforce CC instance, go to `Administration` -> `Site Development` -> `Import & Export`.
 - Upload the XML file using the Upload feature under `Import & Export Files`-section.
 - Start the import wizard using the `Import` button under `Meta Data`-section
@@ -41,6 +43,7 @@ The Queue-it cartridge relies on multiple attributes defined on the SitePreferen
     - When the XML schema validation finishes, make sure *not* to check the "Delete existing attribute definitions...". When this checkbox is left unchecked, the attributes defined in the XML file will be added, without removing any existing attributes.
     - Verify that the file content summary contains 1 system type extension,6 attribute definitions and 1 attribute group definition and nothing else and select import.
 
+#### Set Queue-It attributes values
 The Queue-it configuration is now ready to be used. The configuration can be found under `Merchant Tools` *(select site if prompted)* -> `Site Preferences` -> `Custom Preferences`. Please configure all the attributes before setting up the Queue-it cartridge.
 
 If you have multiple sites in Salesforce CC, but with a single account on Queue-it, please use the "Edit Across Sites" functionality on the Queue-it Configurations section of Custom Site Preferences.
