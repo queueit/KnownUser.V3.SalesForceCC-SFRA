@@ -6,7 +6,7 @@
  */
 
 /**
- * Queue It custom settings provider for Salesforce
+ * Queue-it custom settings provider for Salesforce
  * @param {Site} currentSite The current site
  */
 function SalesforceCustomSettingsProvider(currentSite) {
@@ -29,6 +29,9 @@ function SalesforceCustomSettingsProvider(currentSite) {
     /** @type {boolean} */
     this.isEnqueueTokenEnabled = !!currentSite.getCustomPreferenceValue("queueit-enableEnqueueToken");
 
+    /** @type {boolean} */
+    this.isEnqueueTokenKeyDisabled = !!currentSite.getCustomPreferenceValue("queueit-disableEnqueueTokenKey");
+
     /** @type {?EnqueueTokenSettings} */
     this.enqueueTokenSettings = null;
 
@@ -36,7 +39,8 @@ function SalesforceCustomSettingsProvider(currentSite) {
         this.enqueueTokenSettings = {
             secretKey: this.secretKey,
             customerId: this.customerId,
-            validityTime: 60 * 1000
+            validityTime: 60 * 1000,
+            isEnqueueTokenKeyEnabled: !this.isEnqueueTokenKeyDisabled
         };
     }
 }

@@ -1,9 +1,9 @@
 'use strict';
 
-const SALESFORCE_SDK_VERSION = "2.0.0";
+const SALESFORCE_SDK_VERSION = "2.1.0";
 
 const QueueItHelper = {
-    generateUUID: () => {
+    generateUUID: function() {
         const s = [];
         const hexDigits = "0123456789abcdef";
         for (let i = 0; i < 36; i++) {
@@ -16,7 +16,7 @@ const QueueItHelper = {
         return s.join("");
     },
 
-    addKUPlatformVersion : (redirectQueueUrl) => {
+    addKUPlatformVersion: function(redirectQueueUrl) {
         return redirectQueueUrl + "&kupver=salesforce-" + SALESFORCE_SDK_VERSION;
     }
 }

@@ -10,6 +10,7 @@
  * @property {string} secretKey
  * @property {string} customerId
  * @property {Number} validityTime
+ * @property {boolean} isEnqueueTokenKeyEnabled
  */
 
 const Cookie = require("dw/web/Cookie");
@@ -25,25 +26,27 @@ const { QueueItHelper } = require("./QueueItHelper.js");
  * @param {Response} salesforceNativeResponse
  */
 function SalesforceContextProvider(salesforceNativeRequest, salesforceNativeResponse) {
-    this._httpRequest = new SalesforceHttpRequest(salesforceNativeRequest);
-    this._httpResponse = new SalesforceHttpResponse(salesforceNativeResponse);
-    this._cryptoProvider = new SalesforceCryptoProvider();
-    this._enqueueTokenProvider = null;
+    var self = this;
 
-    this.getHttpRequest = () => {
-        return this._httpRequest;
+    self._httpRequest = new SalesforceHttpRequest(salesforceNativeRequest);
+    self._httpResponse = new SalesforceHttpResponse(salesforceNativeResponse);
+    self._cryptoProvider = new SalesforceCryptoProvider();
+    self._enqueueTokenProvider = null;
+
+    self.getHttpRequest = function() {
+        return self._httpRequest;
     }
 
-    this.getHttpResponse = () => {
-        return this._httpResponse;
+    self.getHttpResponse = function() {
+        return self._httpResponse;
     }
 
-    this.getEnqueueTokenProvider = () => {
-        return this._enqueueTokenProvider;
+    self.getEnqueueTokenProvider = function() {
+        return self._enqueueTokenProvider;
     }
 
-    this.getCryptoProvider = () => {
-        return this._cryptoProvider;
+    self.getCryptoProvider = function() {
+        return self._cryptoProvider;
     }
 
     /**
@@ -52,13 +55,13 @@ function SalesforceContextProvider(salesforceNativeRequest, salesforceNativeResp
      * @param {?string} clientIp
      * @param {?any} customData
      */
-    this.setEnqueueTokenProvider = (settings, clientIp, customData) => {
+    self.setEnqueueTokenProvider = function(settings, clientIp, customData) {
         if (!settings || !(settings.validityTime > -1)) {
-            this._enqueueTokenProvider = null;
+            self._enqueueTokenProvider = null;
             return;
         }
 
-        this._enqueueTokenProvider = new SalesforceEnqueueTokenProvider(
+        self._enqueueTokenProvider = new SalesforceEnqueueTokenProvider(
             settings,
             clientIp,
             customData
@@ -71,19 +74,20 @@ function SalesforceContextProvider(salesforceNativeRequest, salesforceNativeResp
  * @param {Request} salesforceNativeRequest
  */
 function SalesforceHttpRequest(salesforceNativeRequest) {
-    this._salesforceNativeRequest = salesforceNativeRequest;
+    var self = this;
+    self._salesforceNativeRequest = salesforceNativeRequest;
 
-    this.getUserAgent = () => {
-        return this._salesforceNativeRequest.getHttpUserAgent();
+    self.getUserAgent = function() {
+        return self._salesforceNativeRequest.getHttpUserAgent();
     }
 
-    this.getHeader = (name) => {
+    self.getHeader = function(name) {
         if(typeof name !== "string") {
             return "";
         }
         var lowerCaseName = name.toLowerCase();
 
-        var headers = this._salesforceNativeRequest.getHttpHeaders();
+        var headers = self._salesforceNativeRequest.getHttpHeaders();
         var value = headers.get(lowerCaseName);
 
         if (!value)
@@ -92,18 +96,18 @@ function SalesforceHttpRequest(salesforceNativeRequest) {
         return value;
     }
 
-    this.getAbsoluteUri = () => {
-        return this._salesforceNativeRequest.getHttpURL().toString();
+    self.getAbsoluteUri = function() {
+        return self._salesforceNativeRequest.getHttpURL().toString();
     }
 
-    this.getUserHostAddress = () => {
-        return this._salesforceNativeRequest.getHttpRemoteAddress();
+    self.getUserHostAddress = function() {
+        return self._salesforceNativeRequest.getHttpRemoteAddress();
     }
 
-    this.getCookieValue = (cookieKey) => {
-        var cookies = this._salesforceNativeRequest.getHttpCookies();
+    self.getCookieValue = function(cookieKey) {
+        var cookies = self._salesforceNativeRequest.getHttpCookies();
 
-        if (cookies && cookieKey in cookies) {
+        if (cookies && cookieKey in cookies && cookies[cookieKey]) {
             var cookie = cookies[cookieKey];
             var cookieVal = decodeURIComponent(cookie.value);
             return cookieVal;
@@ -113,13 +117,13 @@ function SalesforceHttpRequest(salesforceNativeRequest) {
         }
     }
 
-    this.getRequestBodyAsString = () => {
+    self.getRequestBodyAsString = function() {
         // FRWI: Lets move this to GitHub documentation.
         // ---------------------------------------------
         // getRequestBodyAsString will only be set if request is POST or PUT
         // and is not a form submission (i.e. sent with "application/x-www-form-urlencoded" encoding).
         // For requests where the request body is encoded as query string (above encoding), the url trigger should be used instead.
-        var httpParameterMap = this._salesforceNativeRequest
+        var httpParameterMap = self._salesforceNativeRequest
             .getHttpParameterMap();
 
         var requestBody = httpParameterMap.getRequestBodyAsString();
@@ -153,9 +157,10 @@ function SalesforceHttpRequest(salesforceNativeRequest) {
  * @param {Response} salesforceNativeResponse
  */
 function SalesforceHttpResponse(salesforceNativeResponse) {
-    this._salesforceNativeResponse = salesforceNativeResponse;
+    var self = this;
+    self._salesforceNativeResponse = salesforceNativeResponse;
 
-    this.setCookie = (cookieName, cookieValue, domain, expiration, isHttpOnly, isSecure) => {
+    self.setCookie = function(cookieName, cookieValue, domain, expiration, isHttpOnly, isSecure) {
 
         var cookieToAdd = new Cookie(cookieName, encodeURIComponent(cookieValue));
         if (!((domain == null) || (domain == ""))) {
@@ -170,7 +175,7 @@ function SalesforceHttpResponse(salesforceNativeResponse) {
         cookieToAdd.setHttpOnly(isHttpOnly)
         cookieToAdd.setSecure(isSecure)
 
-        this._salesforceNativeResponse.addHttpCookie(cookieToAdd);
+        self._salesforceNativeResponse.addHttpCookie(cookieToAdd);
 
         return "";
     }
@@ -180,7 +185,9 @@ function SalesforceHttpResponse(salesforceNativeResponse) {
  * Salesforce Crypto Provider Class
  */
 function SalesforceCryptoProvider() {
-    this.getSha256Hash = (secretKey, stringToHash) => {
+    var self = this;
+
+    self.getSha256Hash = function(secretKey, stringToHash) {
         var mac = new Mac(Mac.HMAC_SHA_256);
 
         const hash = mac.digest(stringToHash, secretKey);
@@ -197,32 +204,37 @@ function SalesforceCryptoProvider() {
  * @param {?any} customData
  */
 function SalesforceEnqueueTokenProvider(settings, clientIp, customData) {
-    this._settings = settings;
-    this._clientIp = clientIp;
+    var self = this;
+    self._settings = settings;
+    self._clientIp = clientIp;
 
     var customDataObject = {};
     if (customData !== null) {
         customDataObject.cd = customData;
     }
 
-    this._customData = JSON.stringify(customDataObject);
+    self._customData = JSON.stringify(customDataObject);
 
-    this.getEnqueueToken = (waitingRoomId) => {
-        if (!this._settings || this._settings.validityTime < -1 || !this._clientIp) {
+    self.getEnqueueToken = function(waitingRoomId) {
+        if (!self._settings || self._settings.validityTime < -1 || !self._clientIp) {
             return null;
         }
 
-        const token = Token.Enqueue(this._settings.customerId)
+        var payload = Payload.Enqueue()
+            .WithCustomData(self._customData);
+
+        if(self._settings.isEnqueueTokenKeyEnabled) {
+            payload = payload.WithKey(QueueItHelper.generateUUID());
+        }
+
+        const token = Token.Enqueue(self._settings.customerId)
             .WithPayload(
-                Payload.Enqueue()
-                    .WithKey(QueueItHelper.generateUUID())
-                    .WithCustomData(this._customData)
-                    .Generate()
+                payload.Generate()
             )
             .WithEventId(waitingRoomId)
-            .WithIpAddress(this._clientIp)
-            .WithValidity(this._settings.validityTime)
-            .Generate(this._settings.secretKey);
+            .WithIpAddress(self._clientIp)
+            .WithValidity(self._settings.validityTime)
+            .Generate(self._settings.secretKey);
 
         return token.Token;
     }

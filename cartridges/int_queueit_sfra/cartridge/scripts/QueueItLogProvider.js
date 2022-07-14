@@ -9,7 +9,7 @@ const Logger = require('dw/system/Logger');
 const { SalesforceCustomSettingsProvider } = require('./SalesforceCustomSettingsProvider.js');
 
 /**
- * QueueIT Logging Class
+ * Queue-it Logging Class
  * @param {Site} currentSite
  */
 function QueueItLogProvider(currentSite) {
@@ -17,7 +17,7 @@ function QueueItLogProvider(currentSite) {
     const _isLoggingEnabled = new SalesforceCustomSettingsProvider(currentSite).isLoggingEnabled;
     const _logger = Logger.getLogger('QueueIt', 'QueueIt');
 
-    const getCookieInfo = () => {
+    const getCookieInfo = function() {
 
         // QueueIt cookies begin with hardcoded string: "QueueITAccepted"
         const cookiePrefix = 'QueueITAccepted';
@@ -43,10 +43,9 @@ function QueueItLogProvider(currentSite) {
         return matchingCookies;
     };
 
-    this.logEvent = (eventName, eventDetails, queueItToken) => {
+    this.logEvent = function(eventName, eventDetails, queueItToken) {
 
         try {
-            // Check if QueueIt logging is enabled.
             if (!_isLoggingEnabled) {
                 return;
             }
@@ -73,10 +72,9 @@ function QueueItLogProvider(currentSite) {
      * @param {string} eventName
      * @param {SfraRequest} sfraRequest
      */
-    this.logCartEvent = (eventName, sfraRequest) => {
+    this.logCartEvent = function(eventName, sfraRequest) {
 
         try {
-            // Check if QueueIt logging is enabled.
             if (!_isLoggingEnabled) {
                 return;
             }

@@ -79,10 +79,10 @@ function handleRequest() {
             }
         } else {
             if (requestUrl !== requestUrlWithoutToken && validationResult.actionType === "Queue") {
-
                 queueItLogger.logEvent('RedirectToQueue', validationResult, queueitToken);
                 response.redirect(requestUrlWithoutToken);
             }
+
             queueItLogger.logEvent('Ignore action', validationResult, queueitToken);
             return;
         }

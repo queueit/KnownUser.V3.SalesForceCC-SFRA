@@ -26,6 +26,14 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value>false</default-value>
             </attribute-definition>
+            <attribute-definition attribute-id="queueit-disableEnqueueTokenKey">
+                <display-name xml:lang="x-default">Disable enqueue token key</display-name>
+                <description xml:lang="x-default">f you are using invite-only waiting rooms simultaneously and want to generate default enqueuetoken on the connector you need set this to true, to disable the enqueue token key. You also need to set "Require user identification key" to Disabled, in your Waiting Room in GO self-service platform.</description>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
             <attribute-definition attribute-id="queueit-enableLogging">
                 <display-name xml:lang="x-default">Enable QueueIt Logging</display-name>
                 <description xml:lang="x-default">Enable logging to log queue-it data.</description>
@@ -59,6 +67,7 @@
                 <attribute attribute-id="queueit-customerId"/>
                 <attribute attribute-id="queueit-secretKey"/>
                 <attribute attribute-id="queueit-enableEnqueueToken"/>
+                <attribute attribute-id="queueit-disableEnqueueTokenKey"/>
                 <attribute attribute-id="queueit-enableLogging"/>
                 <attribute attribute-id="queueit-integrationsConfigString"/>
             </attribute-group>

@@ -1,0 +1,18 @@
+{
+  "name": "@queue-it/queue-token",
+  "version": "1.0.3",
+  "description": "Ensures that end users cannot enter the queue without a valid token and to be a container which can carry sensitive user information from integrating system into the queue",
+  "repository": "https://github.com/queueit/QueueToken.V1.JavaScript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {},
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint -c .eslintrc.json --fix"
+    ]
+  }
+}
