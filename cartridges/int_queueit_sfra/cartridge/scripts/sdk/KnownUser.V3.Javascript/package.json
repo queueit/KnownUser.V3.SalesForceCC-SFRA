@@ -1,62 +1,27 @@
 {
-  "_from": "queueit-knownuser",
-  "_id": "queueit-knownuser@3.7.5",
-  "_inBundle": false,
-  "_integrity": "sha512-rdjvexrU0mar/Yyz5HBaMUoRce7DO/LrhEvEBuPuavGVBrpebnoE8j1wB6eD/8Qzw3wDBLGUPk/LyuwGt0mJXg==",
-  "_location": "/queueit-knownuser",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "queueit-knownuser",
-    "name": "queueit-knownuser",
-    "escapedName": "queueit-knownuser",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/queueit-knownuser/-/queueit-knownuser-3.7.5.tgz",
-  "_shasum": "8012e0785e1db35a3053b8f6ee2b5f10e51b8c4f",
-  "_spec": "queueit-knownuser",
-  "_where": "/workspaces/knownuser-v3-salesforce",
-  "author": {
-    "name": "QueueIT"
-  },
-  "bugs": {
-    "url": "https://github.com/queueit/KnownUser.V3.Javascript/issues"
-  },
-  "bundleDependencies": false,
-  "deprecated": false,
+  "name": "queueit-knownuser",
+  "version": "3.7.10",
   "description": "SDK to integrate Queue-it into a javascript based server side application.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/queueit/KnownUser.V3.Javascript",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc && npm run browserify",
+    "browserify": "browserify . -s QueueIT.KnownUserV3.SDK -o dist/browserified.js",
+    "test": "mocha --recursive",
+    "buildtest": "npm run build && npm run test",
+    "test:watch": "nodemon --watch test -x \"npm run test\""
+  },
+  "keywords": [],
+  "author": "QueueIT",
+  "license": "MIT",
   "devDependencies": {
     "browserify": "^17.0.0",
     "chai": "^4.3.4",
     "chai-string": "^1.5.0",
     "mocha": "^9.1.3",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.4"
-  },
-  "homepage": "https://github.com/queueit/KnownUser.V3.Javascript#readme",
-  "keywords": [],
-  "license": "MIT",
-  "main": "dist/index.js",
-  "name": "queueit-knownuser",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/queueit/KnownUser.V3.Javascript.git"
-  },
-  "scripts": {
-    "browserify": "browserify . -s QueueIT.KnownUserV3.SDK -o dist/browserified.js",
-    "build": "tsc && npm run browserify",
-    "buildtest": "npm run build && npm run test",
-    "prepare": "npm run build",
-    "test": "mocha --recursive",
-    "test:watch": "nodemon --watch test -x \"npm run test\""
-  },
-  "types": "dist/index.d.ts",
-  "version": "3.7.5"
+    "typescript": "^4.6.2"
+  }
 }
