@@ -21,15 +21,15 @@ This Salesforce Commerce Cloud (CC) SFRA Cartridge will help you implement Queue
 ### QueueIT attributes
 The Queue-it cartridge relies on multiple attributes defined on the SitePreferences system object type, built in Salesforce CC SFRA. The attributes allows you to enable queue-it on a per-site basis and use different customer ids and configurations per site. You can either mannually define the following attributes in SitePreferences or download `system-objecttype-extensions.xml` file from [here](https://github.com/queueit/KnownUser.V3.SalesForceCC-SFRA/blob/main/cartridges/int_queueit_sfra/metadata/meta/system-objecttype-extensions.xml) and upload in business manager.
 
-| Attribute                           | Required  | DataType  | Value                                                                                                                     |
-| ---                                 | :---:     | :---:     | :---:                                                                                                                     |
-| `queueit-customerId`                | Yes       | string    | Find your Customer ID in the GO Queue-it Platform.                                                                        |
-| `queueit-enabled`                   | Yes       | bolean    | Default: false                                                                                                            |
-| `queueit-enableEnqueueToken`        | Yes       | bolean    | Default: false. Please see [documentation](https://github.com/queueit/KnownUser.V3.SalesForceCC-SFRA#using-enqueuetoken). |
-| `queueit-disableEnqueueTokenKey`    | Yes       | bolean    | Default: false                                                                                                            |
-| `queueit-enableLogging`             | Yes       | bolean    | Default: false                                                                                                            |
-| `queueit-integrationsConfigString`  | Yes       | bolean    | Find your integration cofiguration in the GO Queue-it Platform.                                                           |
-| `queueit-secretKey`                 | Yes       | string    | Find your Secret key in the GO Queue-it Platform.                                                                         |
+| Attribute                           | Required  | DataType  | Default value   | Available in version  | Note
+| ---                                 | ---       | ---       | ---             | ---                   | ---
+| `queueit-customerId`                | Yes       | string    |                 | 2.0.0                 | Find your Customer ID in the GO Queue-it Platform.
+| `queueit-enabled`                   | Yes       | bolean    | false           | 2.0.0                 |
+| `queueit-enableEnqueueToken`        | Yes       | bolean    | false           | 2.0.0                 | Please see [documentation](https://github.com/queueit/KnownUser.V3.SalesForceCC-SFRA#using-enqueuetoken).
+| `queueit-disableEnqueueTokenKey`    | No        | bolean    | false           | 2.1.0                 |
+| `queueit-enableLogging`             | Yes       | bolean    | false           | 2.0.0                 |
+| `queueit-integrationsConfigString`  | Yes       | string    |                 | 2.0.0                 | Find your integration cofiguration in the GO Queue-it Platform.
+| `queueit-secretKey`                 | Yes       | string    |                 | 2.0.0                 | Find your Secret key in the GO Queue-it Platform.
 
 ### Setup Queue-It attributes
 
