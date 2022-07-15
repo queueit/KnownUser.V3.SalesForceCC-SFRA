@@ -3,7 +3,7 @@ Before getting started please read the [documentation](https://github.com/queuei
 
 This Salesforce Commerce Cloud (CC) SFRA Cartridge will help you implement Queue-it functionality server-side. The cartridge handles the entire flow for you and will also include the client-side JavaScript client to your website (see how this is done below).
 
->You can find the latest released version [here](https://github.com/queueit/KnownUser.V3.SalesForceCC/releases/latest).
+>You can find the latest released version [here](https://github.com/queueit/KnownUser.V3.SalesForceCC-SFRA/releases/latest).
 
 ## Installation
 
@@ -11,7 +11,7 @@ This Salesforce Commerce Cloud (CC) SFRA Cartridge will help you implement Queue
 **Important:** This cartridge *should* have a [Compatibility Mode](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/site_development/b2c_compatibility_mode_considerations.html?cp=0_7_6_4) of 19.10, but has only been tested against 21.2. Please we cautious when installing this cartridge if you require 19.10 (or lower).
 
 ### Queue-IT Cartridge
-- Download the SFRA cartridge from latest [Release](https://github.com/queueit/KnownUser.V3.SalesForceCC/releases/latest)
+- Download the SFRA cartridge from latest [Release](https://github.com/queueit/KnownUser.V3.SalesForceCC-SFRA/releases/latest)
 - Depending on how you manage your codebase, you can upload the cartridge directly to your Salesforce CC instance or include it in your codebase.
 - When the cartridge is uploaded, make sure to add it to the very beginning of your cartridge path, to make sure that Queue-it is able to protect all your site resources.
 - If you have problem with your analytics you need to ignore the requests. Use GO Queue-it Platform to create trigger and ignore action for '__Analytics'. Make sure the ignore is not macthed when add-to-cart or edit cart is invoked
