@@ -45,6 +45,9 @@ function handleRequest() {
         // It is therefor important that this is exactly the url of the users browsers. So, if your webserver is
         // behind e.g. a load balancer that modifies the host name or port, reformat requestUrlWithoutToken before proceeding.
 
+        // Logged for every request reaching this hook, before the enabled check and before any evaluation.
+        queueItLogger.logEvent('OnRequest', { url: requestUrlWithoutToken });
+
         const customerId = customSettingsProvider.customerId;
         const secretKey = customSettingsProvider.secretKey;
         const integrationsConfigString = customSettingsProvider.integrationConfigString;
